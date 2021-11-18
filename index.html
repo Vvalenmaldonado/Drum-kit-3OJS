@@ -1,0 +1,113 @@
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+     <meta charset="UTF-8">
+     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link rel="StyleSheet" href="stylesheet.css">
+     <title>JS Drum Kit </title>
+ </head>
+ <body>
+    <div class="keys">
+        <div data-key="65" class="key">
+            <kbd>A</kbd>
+            <span class="sound">clap</span>
+        </div>
+        <div data-key="83" class="key">
+            <kbd>S</kbd>
+            <span class="sound">hihat</span>
+        </div>
+        <div data-key="68" class="key">
+            <kbd>D</kbd>
+            <span class="sound">kick</span>
+        </div>
+        <div data-key="70" class="key">
+            <kbd>F</kbd>
+            <span class="sound">openhat</span>
+        </div>
+        <div data-key="71" class="key">
+            <kbd>G</kbd>
+            <span class="sound">boom</span>
+        </div>
+        <div data-key="72" class="key">
+            <kbd>H</kbd>
+            <span class="sound">ride</span>
+        </div>
+        <div data-key="74" class="key">
+            <kbd>J</kbd>
+            <span class="sound">snare</span>
+        </div>
+        <div data-key="75" class="key">
+            <kbd>K</kbd>
+            <span class="sound">tom</span>
+        </div>
+        <div data-key="76" class="key">
+            <kbd>L</kbd>
+            <span class="sound">tink</span> 
+        </div>
+    </div>
+    <audio data-key="65" src="sounds/clap.wav"></audio>
+    <audio data-key="83" src="sounds/hihat.wav"></audio>
+    <audio data-key="68" src="sounds/kick.wav"></audio>
+    <audio data-key="70" src="sounds/openhat.wav"></audio>
+    <audio data-key="71" src="sounds/boom.wav"></audio>
+    <audio data-key="72" src="sounds/ride.wav"></audio>
+    <audio data-key="74" src="sounds/snare.wav"></audio>
+    <audio data-key="75" src="sounds/tom.wav"></audio>
+    <audio data-key="76" src="sounds/tink.wav"></audio>
+ </body>
+ <script>
+     //Window captura el evento de la ventana seleccionada, en este caso, tenemos una sola ventana(especifico)
+     //Document, captura el evento de todas las ventanas de la pagina. (general)
+
+     //A la ventana, le aplicamos .addEventListener(Toma el evento y lo pone a escuchar con la interaccion del usuario)
+    
+     window.addEventListener('keydown', function(e){
+          //(tipo[click, keydown,etc], function[elemento]) reconoce las data-key existentes, si no estan, devuelve null
+          //Devuelve null porque no hay ningun audio con esa key.
+
+         // Sonido.
+         const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+          
+         // Si no hay audio:
+         if(!audio) return;// Stop the function 
+
+
+         //Efecto amarillo, guardamos en una constante el selector key para luego cambiarlo.
+         const key = document.querySelector(`.key[data-key="${e.keyCode}"]`);
+
+         //A ese div le agregamos la clase playing. 
+         key.classList.add('playing')
+
+         
+          
+         
+         audio.currentTime = 0;//Cada 'keydown' el audio se revobina al comienzo. 
+         audio.play();// Activamos el audio asociado a la key. 
+         console.log(key)
+     });
+
+     //Array de todas las .key
+     const keys = document.querySelectorAll('.key');
+
+     function removeTransition(e){
+       if(e.propertyName !== 'transform') return ; //skip si eso no es un transform 
+       console.log(this);
+       this.classList.remove('playing'); //this es lo ultimo que fue llamado, en este caso es .forEach(e= .key)
+     }
+
+
+
+     //Por cada elemento, le agregamos un eventoListener, que al escucharse, realiza la transicion (amarilla) 
+     //Y al finalizarse, la remueve
+     keys.forEach(e=> e.addEventListener('transitionend', removeTransition));
+
+     
+
+     
+
+ </script>
+ </html>
+ 
+ 
+ 

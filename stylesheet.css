@@ -1,0 +1,42 @@
+body{
+    background-image: url(https://i.pinimg.com/originals/55/4e/0e/554e0ee5ef82632e26b08c742b24b44c.jpg);
+    background-size: 100%;
+  background-repeat: no-repeat;
+}
+.keys{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    
+}
+.key{
+    border: 4px solid black;
+    border-radius: 5px;
+    margin: 1rem;
+    font-size: 1.5rem;
+    padding: 1rem .5rem;
+    transition: all .10s;
+    width: 100px;
+    text-align: center;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.507);
+    text-shadow: 0 0 5px black;
+    margin-top: 20%;
+}
+
+.playing {
+    transform: scale(1.1);
+    border-color: #ffc600;
+    box-shadow: 0 0 10px #ffc600;
+}
+kbd{
+    display:block;
+    font-size: 40px;
+}
+.sound {
+    font-size: 1.2rem;
+    text-transform: uppercase; /* transformar el texto en mayusculas o minusculas: todo mayuscula*/
+    letter-spacing: 1px;
+    color:#ffc600;
+}
